@@ -244,26 +244,30 @@ peeking_next_by_clone! { ['a, T] ::std::result::Iter<'a, T> }
 peeking_next_by_clone! { [T] ::std::iter::Empty<T> }
 
 #[cfg(feature = "use_alloc")]
-const _: () = {
-    peeking_next_by_clone! { ['a, T] alloc::collections::linked_list::Iter<'a, T> }
-    peeking_next_by_clone! { ['a, T] alloc::collections::vec_deque::Iter<'a, T> }
+peeking_next_by_clone! { ['a, T] alloc::collections::linked_list::Iter<'a, T> }
+#[cfg(feature = "use_alloc")]
+peeking_next_by_clone! { ['a, T] alloc::collections::vec_deque::Iter<'a, T> }
 
-    peeking_next_by_clone! { ['a, K, V] alloc::collections::btree_map::Iter<'a, K, V> }
-    peeking_next_by_clone! { ['a, K, V] alloc::collections::btree_map::Keys<'a, K, V> }
-    peeking_next_by_clone! { ['a, K, V] alloc::collections::btree_map::Values<'a, K, V> }
+#[cfg(feature = "use_alloc")]
+peeking_next_by_clone! { ['a, K, V] alloc::collections::btree_map::Iter<'a, K, V> }
+#[cfg(feature = "use_alloc")]
+peeking_next_by_clone! { ['a, K, V] alloc::collections::btree_map::Keys<'a, K, V> }
+#[cfg(feature = "use_alloc")]
+peeking_next_by_clone! { ['a, K, V] alloc::collections::btree_map::Values<'a, K, V> }
 
-    peeking_next_by_clone! { ['a, T] alloc::collections::btree_set::Iter<'a, T> }
-    peeking_next_by_clone! { ['a, T] alloc::collections::binary_heap::Iter<'a, T> }
-};
+#[cfg(feature = "use_alloc")]
+peeking_next_by_clone! { ['a, T] alloc::collections::btree_set::Iter<'a, T> }
+#[cfg(feature = "use_alloc")]
+peeking_next_by_clone! { ['a, T] alloc::collections::binary_heap::Iter<'a, T> }
 
 #[cfg(feature = "use_std")]
-const _: () = {
-    peeking_next_by_clone! { ['a, K, V] std::collections::hash_map::Iter<'a, K, V> }
-    peeking_next_by_clone! { ['a, K, V] std::collections::hash_map::Keys<'a, K, V> }
-    peeking_next_by_clone! { ['a, K, V] std::collections::hash_map::Values<'a, K, V> }
+peeking_next_by_clone! { ['a, K, V] std::collections::hash_map::Iter<'a, K, V> }
+#[cfg(feature = "use_std")]
+peeking_next_by_clone! { ['a, K, V] std::collections::hash_map::Keys<'a, K, V> }
+#[cfg(feature = "use_std")]
+peeking_next_by_clone! { ['a, K, V] std::collections::hash_map::Values<'a, K, V> }
 
-    peeking_next_by_clone! { ['a, T] std::collections::hash_set::Iter<'a, T> }
-};
+peeking_next_by_clone! { ['a, T] std::collections::hash_set::Iter<'a, T> }
 
 // cloning a Rev has no extra overhead; peekable and put backs are never DEI.
 peeking_next_by_clone! { [I: Clone + PeekingNext + DoubleEndedIterator]
